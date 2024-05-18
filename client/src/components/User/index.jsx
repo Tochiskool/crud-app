@@ -26,17 +26,20 @@ const User = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => {
+            {users.map((user, index) => {
               return (
                 <>
-                  <tr>
+                  <tr key={index}>
                     <td>{user.Name}</td>
                     <td>{user.Email}</td>
                     <td>{user.Age}</td>
-                    <td>{user.Action}</td>
                     <td>
-                      <button>Edit</button>
-                      <button>Delete</button>
+                      <Link to='/update' className='btn btn-success'>
+                        Update
+                      </Link>
+                      <Link to='/delete' className='btn btn-success'>
+                        Delete
+                      </Link>
                     </td>
                   </tr>
                 </>
