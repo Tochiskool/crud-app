@@ -1,7 +1,8 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const User = () => {
+const Users = () => {
   const [users, setUsers] = useState([
     {
       Name: "Christian",
@@ -10,6 +11,12 @@ const User = () => {
       Action: "",
     },
   ]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5001")
+      .then((result) => setUsers(result.data))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className='d-flex vh-100 bg-primary justify-content-center align-items-center'>
       <div className='w-50 bg-white rounded p-3'>
@@ -30,14 +37,14 @@ const User = () => {
               return (
                 <>
                   <tr key={index}>
-                    <td>{user.Name}</td>
-                    <td>{user.Email}</td>
-                    <td>{user.Age}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.age}</td>
                     <td>
                       <Link to='/update' className='btn btn-success'>
                         Update
                       </Link>
-                      <Link to='/delete' className='btn btn-success'>
+                      <Link to='/delete' className='btn btn-danger'>
                         Delete
                       </Link>
                     </td>
@@ -52,4 +59,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Users;
